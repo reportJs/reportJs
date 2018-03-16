@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example</title>
+    <script src="../src/report-js.js"></script>
+    <script src="../src/wrap.js"></script>
+<!--    <script src="../node_modules/jquery/dist/jquery.js"></script>-->
+    <script src="./zepto.js"></script>
+
+</head>
+<button id="aa">1111</button>
+<body>
+    <script>
+        QYLIN_REPORT.init({
+            id: 1,
+            url: "http://127.0.0.1/badjs"
+        });
+
+        QYLIN_REPORT.tryJs().spyAll();
+
+        $("#aa").on("click",function (){
+            aaa
+        })
+
+        $("#aa").off("click" )
+    </script>
+</body>
+</html>

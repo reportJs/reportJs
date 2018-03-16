@@ -1,0 +1,72 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example</title>
+    <!-- report-js -->
+  <script type="text/javascript">
+    (function (w) {
+      function error(msg, url, line) {
+        // console.log('监听错误上报-window.onerror2')
+        var REPORT_URL = "http://children-log.code-test.100tal.com/log/"; // 收集上报数据的信息
+        var m = [msg, url, line, navigator.userAgent, +new Date]; // 收集错误信息，发生错误的脚本文件网络地址，用户代理信息，时间
+        var url = REPORT_URL + m.join('||'); // 组装错误上报信息内容URL
+        var img = new Image;
+        img.onload = img.onerror = function () {
+          img = null;
+        };
+        img.src = url; // 发送数据到后台cgi
+      }
+      // 监听错误上报
+      window.onerror = function (msg, url, line) {
+        //  console.log('监听错误上报-window.onerror')
+        error(msg, url, line);
+      }
+    })(window);
+  </script>
+  <script type="text/javascript" src="/static/js/report-js.js" crossorigin="true"></script>
+  <script type="text/javascript">
+    (function (w) {
+      QYLIN_REPORT.init({
+        id: 1, // 上报 id, 不指定 id 将不上报
+        uin: 123, // 指定用户 id, (默认已经读取 qq uin)
+        delay: 1000, // 当 combo 为 true 可用，延迟多少毫秒，合并缓冲区中的上报（默认）
+        url: "http://children-log.code-test.100tal.com/reportjs/", // 指定上报地址
+        ignore: [/Script error/i], // 忽略某个错误
+        random: 1, // 抽样上报，1~0 之间数值，1为100%上报（默认 1）
+        repeat: 5, // 重复上报次数(对于同一个错误超过多少次不上报)
+        // 避免出现单个用户同一错误上报过多的情况
+        onReport: function (id, errObj) {}, // 当上报的时候回调。 id: 上报的 id, errObj: 错误的对象
+        submit: null, // 覆盖原来的上报方式，可以自行修改为 post 上报等
+        ext: {}, // 扩展属性，后端做扩展处理属性。例如：存在 msid 就会分发到 monitor,
+        offlineLog: false, // 是否启离线日志 [默认 false]
+        offlineLogExp: 5, // 离线有效时间，默认最近5天
+      });
+      QYLIN_REPORT.tryJs().spySystem();
+      QYLIN_REPORT.report("error msg");
+    })(window);
+
+  </script>
+</head>
+<body>
+    <script>
+
+        //初始化
+        // QYLIN_REPORT.init({id: 7  , uin : 55555, random: 1 , url:"http://127.0.0.1/badjs"})
+
+        //主动上报错误日志
+        QYLIN_REPORT.report("error msg 2");
+
+        //info上报，用于记录操作日志
+        QYLIN_REPORT.info("info");
+
+        //可以结合实时上报，跟踪问题; 不存入存储
+        QYLIN_REPORT.debug("debug");
+
+        //记录离线日志
+        QYLIN_REPORT.offlineLog("offlineLog");
+
+
+    </script>
+</body>
+</html>

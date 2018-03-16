@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <script type="text/javascript">
+            (function (w) {
+                w.reportJsConfig = {
+                    token: '7770a96e93743246f12594ea18dbc833',
+                    behaviour: 15,
+                    url:'http://logs.i-vectors.com:8099/hh',
+                    method:'post',
+                    userData:{uid:'0'},
+                    delay:2000
+                }
+            })(window);
+        </script>
+        <script src="../src/reportJs.js"></script>
+        <!-- <script src="./frontjs2.js"></script> -->
+    </head>
+    <body>
+    <script>
+        console.log('sdad')
+        console.error('sdad')
+        window.reportJs.addUserData('uid',223)
+        window.reportJs.userReport('sasasassa')
+        // test()
+    </script>
+    <!-- <link rel="stylesheet" href="/mocha/mocha.css" /> -->
+    <!-- <img src="frontjs.html2"> -->
+    </body>
+</html>
